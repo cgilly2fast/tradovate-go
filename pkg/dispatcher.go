@@ -18,7 +18,7 @@ func (d Dispatcher[any]) getActions() []Action {
 	return d.StoreActions
 }
 
-func (d Dispatcher[T]) dispatch(action Action) {
+func (d *Dispatcher[T]) dispatch(action Action) {
 	d.Queue.Add( action)
 	
 	if d.Dispatching {
@@ -51,7 +51,7 @@ func (q ActionQueue) Len() int {
 	return q.Length
 }
 
-func (q ActionQueue) Add(action Action) {
+func (q *ActionQueue) Add(action Action) {
 	q.Length = q.Length + 1
 	q.Back.Next = &ActionNode{Value: action, Next: nil}
 	
